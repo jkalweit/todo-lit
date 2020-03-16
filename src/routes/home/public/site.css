@@ -1,0 +1,275 @@
+:root {
+	--dark: #777;
+	--medium: #BBB;
+	--light: white;
+	--highlight: yellow;
+	--gutter: 4px;
+	--unit: 4px;
+	--cell: 32px;
+}
+
+
+html {
+	box-sizing: border-box;
+}
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+body {
+	font-family: -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
+	padding: 0;
+	margin: 0;
+}
+
+header {
+	border-bottom: 1px solid var(--dark);
+	padding: var(--gutter) 0;
+}
+
+header .brand {
+	font-weight: bold;
+}
+
+footer {
+	border-top: 1px solid var(--dark);
+	padding: var(--gutter) 0;
+}
+
+ul {
+	list-style-type: none;
+}
+
+nav a + a {
+	margin-left: 0.5em;
+	padding-left: 0.5em;
+	border-left: 1px dashed var(--medium);
+}
+
+a {
+	color: rgb(0,100,200);
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:visited {
+	color: rgb(0,80,160);
+}
+
+main {
+	padding: 0 var(--gutter);
+}
+
+.container {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 0 var(--gutter);
+}
+
+
+
+table {
+	border-collapse: collapse;
+}
+
+th, td {
+	text-align: left;
+}
+
+/*
+tbody tr {
+	border-bottom: 1px solid var(--medium);
+}
+*/
+
+thead, tfoot {
+	color: var(--dark);
+}
+thead {
+	border-bottom: 1px solid var(--medium);
+}
+
+tr.strikeout td,
+tr.strikeout th { position:relative        } /* Setup a new coordinate system   */
+tr.strikeout td:before, 
+tr.strikeout th:before {                     /* Create a new element that       */
+    content: " ";                              /* …has no text content            */
+    position: absolute;                        /* …is absolutely positioned       */
+    left: 0; top: 50%; width: 100%;            /* …with the top across the middle */
+    border-bottom: 1px dotted #000;             /* …and with a border on the top   */
+}
+
+
+
+
+.highlight {
+	background: var(--highlight);
+}
+
+.line-through {
+	text-decoration: line-through;
+	text-decoration-style: dotted;
+}
+
+
+.ellipsis {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.pre-wrap {
+	white-space: pre-wrap;
+}
+
+.hidden {
+	display: none;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+}
+
+.row-fill {
+	flex: 1 1 auto;
+	width: 100%;
+}
+
+.row-nofill {
+	flex: 0 0 auto; 
+}
+
+
+.w1 { width: calc(var(--cell) * 1); }
+.w2 { width: calc(var(--cell) * 2); }
+.w3 { width: calc(var(--cell) * 3); }
+.w4 { width: calc(var(--cell) * 4); }
+.w5 { width: calc(var(--cell) * 5); }
+.w6 { width: calc(var(--cell) * 6); }
+.w7 { width: calc(var(--cell) * 7); }
+.w8 { width: calc(var(--cell) * 8); }
+.w9 { width: calc(var(--cell) * 9); }
+.w10 { width: calc(var(--cell) * 10); }
+.w11 { width: calc(var(--cell) * 11); }
+.w12 { width: calc(var(--cell) * 12); }
+
+
+.padded { padding: var(--unit); }
+.pad-left { padding-left: calc(2 * var(--unit)); }
+.pad-right { padding-right: calc(2 * var(--unit)); }
+.pad-top { padding-top: calc(2 * var(--unit)); }
+.pad-bottom { padding-bottom: calc(2 * var(--unit)); }
+
+.text-right {
+	text-align: right;
+}
+.text-left {
+	text-align: left;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.hover:hover {
+	background-color: #ddd;
+}
+
+.border-left {
+	border-left: 1px solid var(--dark);
+	margin-left: var(--unit);
+}
+
+@media (min-width: 600px) {
+	:root {
+		--gutter: 16px;
+	}
+}
+
+@media print
+{    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}
+
+
+label {
+	font: 1em sans-serif;
+}
+
+input, 
+textarea {
+	font: 1em sans-serif;
+	border: 1px solid #999;
+	display: block;
+	width: 100%;
+}
+
+input:focus, 
+textarea:focus {
+	border-color: #000;
+}
+
+textarea {
+	vertical-align: top;
+	height: 5em;
+}
+
+
+
+
+
+
+
+
+@font-face {
+	font-family: 'Material Icons';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Material Icons'),
+	local('MaterialIcons-Regular'),
+	url(https://jkalweit.com/lib/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+	url(https://jkalweit.com/lib/fonts/MaterialIcons-Regular.woff) format('woff'),
+	url(https://jkalweit.com/lib/fonts/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+
+i {
+	font-family: 'Material Icons';
+	font-weight: normal;
+	font-style: normal;
+	font-size: 24px;  /* Preferred icon size */
+	display: inline-block;
+	line-height: 1;
+	text-transform: none;
+	letter-spacing: normal;
+	word-wrap: normal;
+	white-space: nowrap;
+	direction: ltr;
+
+	/* Support for all WebKit browsers. */
+	-webkit-font-smoothing: antialiased;
+	/* Support for Safari and Chrome. */
+	text-rendering: optimizeLegibility;
+
+	/* Support for Firefox. */
+	-moz-osx-font-smoothing: grayscale;
+
+	/* Support for IE. */
+	font-feature-settings: 'liga';
+}
+
+
+.green {
+	color: green;
+}
+
+.red {
+	color: red;
+}

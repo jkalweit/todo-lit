@@ -1,0 +1,14 @@
+{
+    "files.exclude": {
+        "**/*.js": {
+            "when": "$(basename).ts"
+        },
+        "**/*.js.map": true
+    },
+    "eslint.enable": true,
+    "eslint.validate": [
+        "html",
+        "javascript",
+        "typescript"
+    ],
+}

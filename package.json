@@ -1,0 +1,46 @@
+{
+  "name": "server",
+  "scripts": {
+    "start": "nodemon ./src/server.js",
+    "debug": "nodemon --inspect ./src/server.js",
+    "build": "tsc -w",
+    "rollup": "node_modules\\.bin\\rollup.cmd -c -w"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "./src/"
+    ],
+    "ignore": [
+      "**/node_modules",
+      "**/client",
+      "**/public",
+      "*.json",
+      "package.json",
+      "package-lock.json"
+    ]
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "chokidar": "^3.3.1",
+    "express": "^4.17.1",
+    "lit-html": "^1.1.2",
+    "moment": "^2.24.0",
+    "page": "^1.11.5",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^11.0.0",
+    "@rollup/plugin-node-resolve": "^6.0.0",
+    "@types/express": "^4.17.2",
+    "@types/node": "^13.1.2",
+    "@types/node-fetch": "^2.5.5",
+    "@types/page": "^1.8.0",
+    "@types/socket.io": "^2.1.4",
+    "@types/socket.io-client": "^1.4.32",
+    "eslint": "^6.8.0",
+    "nodemon": "^2.0.2",
+    "rollup": "^1.27.14",
+    "rollup-plugin-sourcemaps": "^0.5.0",
+    "typescript": "^3.7.5"
+  }
+}

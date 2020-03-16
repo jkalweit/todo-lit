@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "module": "CommonJS",
+        "esModuleInterop": true,
+        "target": "es6",
+        "strict": true,
+        "moduleResolution": "node",
+        "inlineSourceMap": true,
+        // "outDir": "dist",
+        "baseUrl": ".",
+        "lib": ["ESNext", "DOM"],
+        "paths": {
+            "*": [
+                "node_modules/*"
+            ]
+        }
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": []
+}

@@ -1,0 +1,53 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const utils_server_1 = require("./utils-server");
+exports.createApiEndpoint = (filename, name = "api") => {
+    const log = utils_server_1.createLog("Api");
+    const router = express_1.default.Router();
+    const { data: items, save } = utils_server_1.loadJson(filename, {});
+    log("createApiEndpoint", name, filename);
+    router.get(`/`, (req, res) => {
+        log(`GET ${name}/`);
+        res.send(items);
+    });
+    router.get(`/:id`, (req, res) => {
+        const id = req.params.id;
+        log(`GET ${name}/:id`, id);
+        const item = items[id];
+        if (item) {
+            res.send(item);
+        }
+        else {
+            const msg = `Cannot find ${name} with id="${id}"`;
+            log(msg);
+            res.status(404).send(msg);
+        }
+    });
+    router.put(`/:id`, (req, res) => {
+        const item = req.body;
+        log("Put Item", item.id, item);
+        if (item) {
+            log(`PUT ${name}/:id`, item.id);
+            items[item.id] = item;
+            res.status(200).send(item);
+            save();
+        }
+        else {
+            log(`PUT ${name}/:id`, "ERROR: No Item");
+            res.status(400).send("No item in body of request.");
+        }
+    });
+    router.delete(`/:id`, (req, res) => {
+        const id = req.params.id;
+        delete items[id];
+        log("Delete Item", id);
+        res.status(204).send();
+        save();
+    });
+    return router;
+};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBpLWtleXZhbC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImFwaS1rZXl2YWwudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7QUFBQSxzREFBMEM7QUFJMUMsaURBQXFEO0FBRXhDLFFBQUEsaUJBQWlCLEdBQzFCLENBQTJCLFFBQWdCLEVBQUUsT0FBZSxLQUFLLEVBQVUsRUFBRTtJQUU3RSxNQUFNLEdBQUcsR0FBRyx3QkFBUyxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBQzdCLE1BQU0sTUFBTSxHQUFHLGlCQUFPLENBQUMsTUFBTSxFQUFFLENBQUM7SUFFaEMsTUFBTSxFQUFFLElBQUksRUFBRSxLQUFLLEVBQUUsSUFBSSxFQUFFLEdBQUcsdUJBQVEsQ0FBVyxRQUFRLEVBQUUsRUFBRSxDQUFDLENBQUM7SUFDL0QsR0FBRyxDQUFDLG1CQUFtQixFQUFFLElBQUksRUFBRSxRQUFRLENBQUMsQ0FBQztJQUV6QyxNQUFNLENBQUMsR0FBRyxDQUFDLEdBQUcsRUFBRSxDQUFDLEdBQUcsRUFBRSxHQUFHLEVBQUUsRUFBRTtRQUN6QixHQUFHLENBQUMsT0FBTyxJQUFJLEdBQUcsQ0FBQyxDQUFDO1FBQ3BCLEdBQUcsQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUM7SUFDcEIsQ0FBQyxDQUFDLENBQUM7SUFFSCxNQUFNLENBQUMsR0FBRyxDQUFDLE1BQU0sRUFBRSxDQUFDLEdBQUcsRUFBRSxHQUFHLEVBQUUsRUFBRTtRQUM1QixNQUFNLEVBQUUsR0FBRyxHQUFHLENBQUMsTUFBTSxDQUFDLEVBQUUsQ0FBQztRQUN6QixHQUFHLENBQUMsT0FBTyxJQUFJLE1BQU0sRUFBRSxFQUFFLENBQUMsQ0FBQztRQUMzQixNQUFNLElBQUksR0FBTSxLQUFLLENBQUMsRUFBRSxDQUFDLENBQUM7UUFDMUIsSUFBSSxJQUFJLEVBQUU7WUFDTixHQUFHLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDO1NBQ2xCO2FBQU07WUFDSCxNQUFNLEdBQUcsR0FBRyxlQUFlLElBQUksYUFBYSxFQUFFLEdBQUcsQ0FBQztZQUNsRCxHQUFHLENBQUMsR0FBRyxDQUFDLENBQUM7WUFDVCxHQUFHLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsQ0FBQztTQUM3QjtJQUNMLENBQUMsQ0FBQyxDQUFDO0lBRUgsTUFBTSxDQUFDLEdBQUcsQ0FBQyxNQUFNLEVBQUUsQ0FBQyxHQUFHLEVBQUUsR0FBRyxFQUFFLEVBQUU7UUFDNUIsTUFBTSxJQUFJLEdBQU0sR0FBRyxDQUFDLElBQUksQ0FBQztRQUN6QixHQUFHLENBQUMsVUFBVSxFQUFFLElBQUksQ0FBQyxFQUFFLEVBQUUsSUFBSSxDQUFDLENBQUM7UUFDL0IsSUFBSSxJQUFJLEVBQUU7WUFDTixHQUFHLENBQUMsT0FBTyxJQUFJLE1BQU0sRUFBRSxJQUFJLENBQUMsRUFBRSxDQUFDLENBQUM7WUFDaEMsS0FBSyxDQUFDLElBQUksQ0FBQyxFQUFFLENBQUMsR0FBRyxJQUFJLENBQUM7WUFDdEIsR0FBRyxDQUFDLE1BQU0sQ0FBQyxHQUFHLENBQUMsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDM0IsSUFBSSxFQUFFLENBQUM7U0FDVjthQUFNO1lBQ0gsR0FBRyxDQUFDLE9BQU8sSUFBSSxNQUFNLEVBQUUsZ0JBQWdCLENBQUMsQ0FBQztZQUN6QyxHQUFHLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxDQUFDLElBQUksQ0FBQyw2QkFBNkIsQ0FBQyxDQUFDO1NBQ3ZEO0lBQ0wsQ0FBQyxDQUFDLENBQUM7SUFFSCxNQUFNLENBQUMsTUFBTSxDQUFDLE1BQU0sRUFBRSxDQUFDLEdBQUcsRUFBRSxHQUFHLEVBQUUsRUFBRTtRQUMvQixNQUFNLEVBQUUsR0FBRyxHQUFHLENBQUMsTUFBTSxDQUFDLEVBQUUsQ0FBQztRQUN6QixPQUFPLEtBQUssQ0FBQyxFQUFFLENBQUMsQ0FBQztRQUNqQixHQUFHLENBQUMsYUFBYSxFQUFFLEVBQUUsQ0FBQyxDQUFDO1FBQ3ZCLEdBQUcsQ0FBQyxNQUFNLENBQUMsR0FBRyxDQUFDLENBQUMsSUFBSSxFQUFFLENBQUM7UUFDdkIsSUFBSSxFQUFFLENBQUM7SUFDWCxDQUFDLENBQUMsQ0FBQztJQUVILE9BQU8sTUFBTSxDQUFDO0FBQ2xCLENBQUMsQ0FBQyJ9

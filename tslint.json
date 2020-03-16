@@ -1,0 +1,10 @@
+{
+    "extends": "tslint:recommended",
+    "rules": {
+        "typedef": false,
+        "only-arrow-functions": true,
+        "max-line-length": false,
+        "no-console": false,
+        "no-var-requires": false
+    }
+}
